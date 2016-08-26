@@ -26,7 +26,7 @@ Another caveat is that Houston doesn't manage device tokens for you. For that, y
 
 Houston also comes with the `apn` binary, which provides a convenient way to test notifications from the command line.
 
-    $ apn push "d1ef22678d6519bbc66f88eabd322376ad3ee3fb3baaf1cf4c2865d48e9d74a8" -c ~/path/to/apple_push_notification.pem -m "Hello from the command line! " -x -d attachment='https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
+    $ apn push "d1ef22678d6519bbc66f88eabd322376ad3ee3fb3baaf1cf4c2865d48e9d74a8" -c ~/path/to/apple_push_notification.pem -m "Hello from the command line! " -x -d attachment='https://clevertap.com/wp-content/uploads/2015/12/CT_black-logo.png'
 
 ```ruby
 require 'houston'
