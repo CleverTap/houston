@@ -16,9 +16,17 @@ Another caveat is that Houston doesn't manage device tokens for you. For that, y
 
 ## Installation
 
-    $ gem install houston
+    clone the repo
+    $ cd houston && gem build houston.gemspec
+    $ sudo gem install houston-2.2.3.gem
 
 ## Usage
+
+## Command Line Tool
+
+Houston also comes with the `apn` binary, which provides a convenient way to test notifications from the command line.
+
+    $ apn push "d1ef22678d6519bbc66f88eabd322376ad3ee3fb3baaf1cf4c2865d48e9d74a8" -c ~/path/to/apple_push_notification.pem -m "Hello from the command line! " -x -d attachment='https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
 
 ```ruby
 require 'houston'
@@ -104,12 +112,6 @@ Houston::Client.development.devices
 ## Versioning
 
 Houston 2.0 supports the new [enhanced notification format](https://developer.apple.com/library/ios/documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/Chapters/CommunicatingWIthAPS.html#//apple_ref/doc/uid/TP40008194-CH101-SW4). Support for the legacy notification format is available in 1.x releases.
-
-## Command Line Tool
-
-Houston also comes with the `apn` binary, which provides a convenient way to test notifications from the command line.
-
-    $ apn push "<token>" -c /path/to/apple_push_notification.pem -m "Hello from the command line! "
 
 ## Enabling Push Notifications on iOS
 
