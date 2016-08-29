@@ -29,7 +29,7 @@ module Houston
 
     MAXIMUM_PAYLOAD_SIZE = 2048
 
-    attr_accessor :token, :alert, :badge, :sound, :category, :content_available, :mutable_content, :custom_data, :id, :expiry, :priority
+    attr_accessor :token, :alert, :title, :subtitle, :badge, :sound, :category, :content_available, :mutable_content, :custom_data, :id, :expiry, :priority
     attr_reader :sent_at
     attr_writer :apns_error_code
 
@@ -39,6 +39,8 @@ module Houston
     def initialize(options = {})
       @token = options.delete(:token) || options.delete(:device)
       @alert = options.delete(:alert)
+      @title = options.delete(:title)
+      @subtitle = options.delete(:subtitle)
       @badge = options.delete(:badge)
       @sound = options.delete(:sound)
       @category = options.delete(:category)
@@ -55,7 +57,10 @@ module Houston
       json = {}.merge(@custom_data || {}).inject({}){|h,(k,v)| h[k.to_s] = v; h}
 
       json['aps'] ||= {}
-      json['aps']['alert'] = @alert if @alert
+      json['aps']['alert'] = {} 
+      json['aps']['alert']['body'] = @alert if @alert
+      json['aps']['alert']['title'] = @title if @title
+      json['aps']['alert']['subtitle'] = @subtitle if @subtitle
       json['aps']['badge'] = @badge.to_i rescue 0 if @badge
       json['aps']['sound'] = @sound if @sound
       json['aps']['category'] = @category if @category

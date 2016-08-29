@@ -23,6 +23,8 @@ command :push do |c|
 
   c.example 'description', 'apn push <token> -m "Hello, World" -b 57 -s sosumi.aiff'
   c.option '-m', '--alert ALERT', 'Body of the alert to send in the push notification'
+  c.option '-T', '--title TITLE', 'The title of push notification'
+  c.option '-S', '--subtitle SUBTITLE', 'The subtitle of push notification'
   c.option '-b', '--badge NUMBER', 'Badge number to set with the push notification'
   c.option '-s', '--sound SOUND', 'Sound to play with the notification'
   c.option '-y', '--category CATEGORY', 'Category of notification'
@@ -47,6 +49,8 @@ command :push do |c|
     @passphrase = options.passphrase ? password : ""
 
     @alert = options.alert
+    @title = options.title
+    @subtitle = options.subtitle
     @badge = options.badge.nil? ? nil : options.badge.to_i
     @sound = options.sound
     @category = options.category
@@ -78,6 +82,8 @@ command :push do |c|
       notification = Houston::Notification.new(@data || {})
       notification.token = token
       notification.alert = @alert if @alert
+      notification.title = @title if @title
+      notification.subtitle = @subtitle if @subtitle
       notification.badge = @badge if @badge
       notification.sound = @sound if @sound
       notification.category = @category if @category
